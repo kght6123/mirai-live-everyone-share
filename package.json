@@ -1,0 +1,30 @@
+{
+  "name": "mirai-share",
+  "version": "1.0.0",
+  "description": "みんなのみらいにいかすじょうほうをまとめて、みんなにきょうゆうするよ",
+  "author": "kght6123",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/dotenv": "^1.4.0",
+    "@nuxtjs/font-awesome": "^1.0.4",
+    "@nuxtjs/markdownit": "^1.2.7",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.4",
+    "mongodb": "^3.5.1",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^1.0.0",
+    "nodemon": "^1.18.9"
+  }
+}

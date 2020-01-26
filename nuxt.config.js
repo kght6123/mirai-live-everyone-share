@@ -23,6 +23,8 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    // { src: '~/node_modules/highlight.js/styles/xcode.css', lang: 'css' },
+    '~/assets/stylus/hjs.styl',
   ],
   /*
   ** Plugins to load before mounting the App
@@ -49,7 +51,13 @@ module.exports = {
     '@nuxtjs/font-awesome',
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/markdownit
     '@nuxtjs/markdownit',
+    // Doc: https://github.com/nuxt-community/style-resources-module
+    '@nuxtjs/style-resources',
   ],
+
+  styleResources: {
+    stylus: ['~/assets/stylus/global_variables.styl']
+   },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
@@ -60,13 +68,24 @@ module.exports = {
   // See https://github.com/markdown-it/markdown-it
   markdownit: {
     injected: true,
+
+    html: true,
     preset: 'default',
     linkify: true,
     breaks: true,
     use: [
       // 'markdown-it-div',
       // 'markdown-it-attrs'
-    ]
+    ],
+    highlight: function (str, lang) {
+      const hljs = require('highlight.js'); // https://highlightjs.org/
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(lang, str).value;
+        } catch (__) {}
+      }
+      return ''; // use external default escaping
+    }
   },
   /*
   ** Build configuration

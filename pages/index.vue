@@ -20,6 +20,11 @@
         検索する
       </button>
     </div>
+    <div v-for="hitQuestion in hits" :key="hitQuestion._id" class="flex items-center justify-between py-2 px-2">
+      <div>
+        {{ hitQuestion._source.title }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,7 +43,8 @@ export default {
     return {
       title: 'Hello World!!!',
       tags: 'hello world tag sample',
-      markdownText: '# Hello MarkdownIt!!!\n```sh\n### Hello\necho "Hello!"\n```\n'
+      markdownText: '# Hello MarkdownIt!!!\n```sh\n### Hello\necho "Hello!"\n```\n',
+      hits: []
     }
   },
   methods: {
@@ -53,10 +59,15 @@ export default {
     async searchQuestion() {
       const result = await client.search({
         index: 'admin',
-        // body: { foo: 'bar' }
-        // _type	questions
+        body: {
+          query: {
+            match: { tags: 'hello' }
+          }
+        },
+        type:	`questions`
       })
       console.log(`search complete!!!`, result)
+      this.hits = result.hits.hits
     }
   }
 }

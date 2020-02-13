@@ -60,10 +60,10 @@ app.all('/question/regist', cors(), wrap(async (req, res) => {
     .catch((err) => console.error(err))
   const db = client.db(dbName)
   console.log('Connected successfully to mongoDB.')
-  const { name, tags, body } = req.body
+  const { title, tags, body } = req.body
   const startTime = performance.now()
   db.collection('questions').insertOne({
-    name,
+    title,
     tags,
     body
   }, (error, result) => {

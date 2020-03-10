@@ -1,3 +1,5 @@
+// read env.
+const envObj = require(`./env.js`)
 
 module.exports = {
   mode: 'spa',
@@ -13,6 +15,11 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src: 'https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js' },
+      { src: 'https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js' },
+      { src: 'https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js' },
     ]
   },
   /*
@@ -30,6 +37,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/firebase.js', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules
@@ -87,6 +95,10 @@ module.exports = {
       return ''; // use external default escaping
     }
   },
+  dotenv: {
+    /* module options */
+    filename: '.env'
+  },
   /*
   ** Build configuration
   */
@@ -98,4 +110,5 @@ module.exports = {
     }
   },
   serverMiddleware: [`~/api/`],
+  env: envObj,
 }

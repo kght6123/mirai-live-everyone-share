@@ -13,3 +13,7 @@ https://github.com/pixiv/three-vrm/blob/dev/examples/blendshapes.html
 
 他の人の利用OKのVRM
 https://hub.vroid.com/characters/2792872861023597723/models/5013769147837660446
+
+## Firebase.jsのcore-js（3.6.?）が原因でビルドエラーになる
+
+どりあえず、CDN版を使うようにする

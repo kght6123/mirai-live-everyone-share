@@ -8,7 +8,7 @@ const bodyParser = require('body-parser')
 
 // const ReadPreference = require('mongodb')
 const MongoClient = require('mongodb').MongoClient
-const url = `mongodb://127.0.0.1:17017/admin`
+const url = `mongodb://127.0.0.1:37017/admin`
 const dbName = `admin`
 
 // https://mongodb.github.io/node-mongodb-native/2.2/reference/connecting/connection-settings/
@@ -59,7 +59,7 @@ app.all('/question/regist', cors(), wrap(async (req, res) => {
     .connect(url, connectOption)
     .catch((err) => console.error(err))
   const db = client.db(dbName)
-  console.log('Connected successfully to mongoDB.')
+  console.log('Connected successfully to mongoDB.', url)
   const { title, tags, body } = req.body
   const startTime = performance.now()
   db.collection('questions').insertOne({

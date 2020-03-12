@@ -7,7 +7,7 @@
       <input class="w-full py-2 px-3 leading-tight" type="text" placeholder="Tags" v-model="tags">
     </div>
     <div class="flex h-64 py-1 px-2">
-      <div class="w-1/2 py-2 px-3 h-full" v-html="$md.render(markdownText)"></div>
+      <div class="w-1/2 py-2 px-3 h-full overflow-y-auto" v-html="$md.render(markdownText)"></div>
       <textarea class="w-1/2 py-2 px-3 h-full" v-model="markdownText"></textarea>
     </div>
     <div class="flex items-center justify-between py-2 px-2">
@@ -20,6 +20,7 @@
         検索する
       </button>
     </div>
+    <input type="file" id="upload-file" accept=".drawio" @change="uploadFile" @dragover="dragOverFile" @drop="dropFile" />
     <div v-for="hitQuestion in hits" :key="hitQuestion._id" class="flex items-center justify-between py-2 px-2">
       <div>
         {{ hitQuestion._source.title }}
@@ -76,13 +77,13 @@ echo "Hello!"
   },
   created() {
     this.$md.use((md, opts) => {
-      console.log(`start`, md, opts);
-      const defaultRenderer = md.renderer.rules.fence.bind(md.renderer.rules);
-      console.log(`defaultRenderer`, defaultRenderer);
+      console.log(`start`, md, opts)
+      const defaultRenderer = md.renderer.rules.fence.bind(md.renderer.rules)
+      console.log(`defaultRenderer`, defaultRenderer)
       md.renderer.rules.fence = (tokens, idx, opts, env, self) => {
-        console.log(`start fence`, tokens, idx, opts, env, self);
-        const token = tokens[idx];
-        console.log(`token`, token);
+        console.log(`start fence`, tokens, idx, opts, env, self)
+        const token = tokens[idx]
+        console.log(`token`, token)
         if (token.info === "drawio") {
           // const jm = new jsMind({
           //   container: "jsmind_container",
@@ -106,11 +107,14 @@ echo "Hello!"
           const mxGraphHtml = `
 <div class="mxgraph" style="max-width: 100%; border: 1px solid transparent;" data-mxgraph="${mxGraphDataEscape}"></div>
 `
-          return mxGraphHtml;
+          setTimeout(function() {
+            GraphViewer.processElements()
+          }, 1000)
+          return mxGraphHtml
         }
-        return defaultRenderer(tokens, idx, opts, env, self);
-      };
-    });
+        return defaultRenderer(tokens, idx, opts, env, self)
+      }
+    })
   },
   methods: {
     async registQuestion() {
@@ -133,6 +137,37 @@ echo "Hello!"
       })
       console.log(`search complete!!!`, result)
       this.hits = result.hits.hits
+    },
+    readDrawIoFiles(files) {
+      const _this = this
+      const reader = new FileReader()
+      reader.onload = function(event) {
+        console.log(`event.target.result`, event.target.result)
+        _this.markdownText = _this.markdownText + `
+
+\`\`\`drawio
+${event.target.result}
+\`\`\`
+`
+      }
+      for (let i = 0; i < files.length; i++) {
+        reader.readAsText(files[i], "utf-8")
+      }
+    },
+    uploadFile(event) {
+      console.log(`e.target.files`, event.target.files)
+      this.readDrawIoFiles(event.target.files)
+    },
+    dragOverFile(event) {
+      event.stopPropagation()
+      event.preventDefault()
+      event.dataTransfer.dropEffect = "copy"
+    },
+    dropFile(event) {
+      event.stopPropagation()
+      event.preventDefault()
+      console.log(`e.dataTransfer.files`, event.dataTransfer.files)
+      this.readDrawIoFiles(event.dataTransfer.files)
     }
   }
 }

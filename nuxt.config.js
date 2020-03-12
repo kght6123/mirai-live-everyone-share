@@ -19,7 +19,7 @@ module.exports = {
     script: [
       { src: 'https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js' },
       { src: 'https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js' },
-      { src: 'https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js' },
+      { src: 'https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js' }
     ]
   },
   /*

@@ -43,9 +43,9 @@ const client = new Client({ host: 'localhost:9200' })
 
 // FIXME:共通関数的なところに入れる
 const escape_html = string => {
-  console.log(`escape_html`, string)
+  // console.log(`escape_html`, string)
   if(typeof string !== 'string') {
-    console.log(`no escape_html`)
+    // console.log(`no escape_html`)
     return string;
   }
   return string.replace(/&/g, '&amp;')
@@ -81,13 +81,13 @@ echo "Hello!"
   },
   created() {
     this.$md.use((md, opts) => {
-      console.log(`start`, md, opts)
+      // console.log(`start`, md, opts)
       const defaultRenderer = md.renderer.rules.fence.bind(md.renderer.rules)
-      console.log(`defaultRenderer`, defaultRenderer)
+      // console.log(`defaultRenderer`, defaultRenderer)
       md.renderer.rules.fence = (tokens, idx, opts, env, self) => {
-        console.log(`start fence`, tokens, idx, opts, env, self)
+        // console.log(`start fence`, tokens, idx, opts, env, self)
         const token = tokens[idx]
-        console.log(`token`, token)
+        // console.log(`token`, token)
         if (token.info === "drawio") {
           // const jm = new jsMind({
           //   container: "jsmind_container",
@@ -107,7 +107,7 @@ echo "Hello!"
             "xml": token.content.trim()
           }
           const mxGraphDataEscape = escape_html(JSON.stringify(mxGraphData))
-          console.log(`mxGraphDataEscape`, mxGraphDataEscape)
+          // console.log(`mxGraphDataEscape`, mxGraphDataEscape)
           const mxGraphHtml = `
 <div class="mxgraph" style="max-width: 100%; border: 1px solid transparent;" data-mxgraph="${mxGraphDataEscape}"></div>
 `
@@ -129,25 +129,28 @@ echo "Hello!"
       )
       console.log(`regist complete!!!`, res)
     },
-    async searchQuestion() {
-      console.log(`search start!`, this.searchText)
+    async searchQuestion(event) {
+      console.log(`search start!`, this.searchText, event.target.value)
       const result = await client.search({
         index: 'admin',
         body: {
           query: {
-            match: { tags: this.searchText }
+            multi_match: {
+              query: event.target.value, 
+              fields: ['title','body','tags']
+            }
           }
         },
         type:	`questions`
       })
-      console.log(`search complete!!!`, result)
+      // console.log(`search complete!!!`, result)
       this.hits = result.hits.hits
     },
     readDrawIoFiles(files) {
       const _this = this
       const reader = new FileReader()
       reader.onload = function(event) {
-        console.log(`event.target.result`, event.target.result)
+        // console.log(`event.target.result`, event.target.result)
         _this.markdownText = _this.markdownText + `
 
 \`\`\`drawio
@@ -160,7 +163,7 @@ ${event.target.result}
       }
     },
     uploadFile(event) {
-      console.log(`e.target.files`, event.target.files)
+      // console.log(`e.target.files`, event.target.files)
       this.readDrawIoFiles(event.target.files)
     },
     dragOverFile(event) {
@@ -171,7 +174,7 @@ ${event.target.result}
     dropFile(event) {
       event.stopPropagation()
       event.preventDefault()
-      console.log(`e.dataTransfer.files`, event.dataTransfer.files)
+      // console.log(`e.dataTransfer.files`, event.dataTransfer.files)
       this.readDrawIoFiles(event.dataTransfer.files)
     }
   }

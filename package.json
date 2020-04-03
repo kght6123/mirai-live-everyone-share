@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@elastic/elasticsearch": "^7.5.1",
+    "@marp-team/marpit": "^1.5.1",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/font-awesome": "^1.0.4",
@@ -29,7 +30,9 @@
     "mongodb": "^3.5.2",
     "nuxt": "^2.0.0",
     "stylus": "^0.54.7",
-    "stylus-loader": "^3.0.2"
+    "stylus-loader": "^3.0.2",
+    "vue-draggable-resizable": "^2.1.0",
+    "vuedraggable": "^2.23.2"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^1.0.0",

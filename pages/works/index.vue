@@ -4,7 +4,7 @@
       <input class="w-full py-2 px-3 leading-tight" type="search" placeholder="search text." v-model="searchText" @input="searchQuestion" @search="searchQuestion">
     </div>
     <!--div class="flex items-center justify-between py-2 px-2">
-      <button class="py-2 px-4 w-full rounded" type="button" @click="searchQuestion">
+      <button type="button" @click="searchQuestion">
         検索する
       </button>
     </div-->
@@ -24,7 +24,7 @@
       <textarea class="w-1/2 py-2 px-3 h-full" v-model="markdownText"></textarea>
     </div>
     <div class="flex items-center justify-between py-2 px-2">
-      <button class="py-2 px-4 w-full rounded" type="button" @click="registQuestion">
+      <button type="button" @click="registQuestion">
         投稿する
       </button>
     </div>

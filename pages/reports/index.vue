@@ -37,6 +37,7 @@
       <div class="card">FBなど</div>
     </div>
     <nuxt-link to="/">戻る</nuxt-link>
+    <h3>チャットスペースいれたい</h3>
   </div>
 </template>
 

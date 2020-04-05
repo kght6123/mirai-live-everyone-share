@@ -112,6 +112,7 @@
     <modal name="hello-world">
       hello, world!
     </modal>
+    <h3>チャットスペースいれたい</h3>
   </div>
 </template>
 

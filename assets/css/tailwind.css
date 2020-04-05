@@ -57,3 +57,18 @@ h2 { @apply text-xl; }
 h3 { @apply text-lg; }
 h4 { @apply text-base; }
 h5 { @apply text-sm; }
+a { @apply underline text-blue-600; }
+a:visited { @apply underline text-purple-600; }
+.v--modal-overlay {
+  backdrop-filter: blur(7px) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+.v--modal {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+@media (prefers-color-scheme: light) {
+  /* light mode */
+}
+@media (prefers-color-scheme: dark) {
+  /* dark mode */
+}

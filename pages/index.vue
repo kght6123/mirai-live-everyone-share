@@ -2,7 +2,7 @@
   <div class="p-2">
     <h1>プロジェクト名</h1>
     <h2>プロダクトバックログ名</h2>
-    <!--h3>2020/04/01(水) kght6123</h3-->
+    <h3>スプリントバックログ</h3>
     <div class="board">
       <draggable
         id="first"
@@ -16,6 +16,7 @@
           v-for="element in list"
           :key="element.name"
           class="card"
+          @click="show"
         >
           <div>{{ element.name }}</div>
           <div>完了の定義</div>
@@ -30,6 +31,32 @@
         </div>
       </draggable>
       <draggable
+        id="first"
+        data-source="juju"
+        :list="list"
+        draggable=".card"
+        group="a"
+        class="card-group bg-blue-300"
+      >
+        <div
+          v-for="element in list"
+          :key="element.name"
+          class="card"
+          @click="showDialog"
+        >
+          <div>{{ element.name }}</div>
+          <div>完了の定義</div>
+          <!--div>細分化タスク１</div>
+          <div>細分化タスク２</div>
+          <div>細分化タスク３</div-->
+          <div class="icon">5</div>
+        </div>
+        <div slot="header" class="card-group-header">
+          <h3 class="title">1Week</h3>
+          <div class="icon" @click="add">➕</div>
+        </div>
+      </draggable>
+      <draggable
         :list="list2"
         draggable=".card"
         group="a"
@@ -39,6 +66,7 @@
           v-for="element in list2"
           :key="element.name"
           class="card"
+          @click="showModalComponent"
         >
           <div>{{ element.name }}</div>
           <div>完了の定義</div>
@@ -76,12 +104,20 @@
         </div>
       </draggable>
     </div>
+    <h3>成果物と目的の差分</h3>
+    <h3>差分の理由</h3>
+    <h3>フィードバック</h3>
     <nuxt-link to="/works">投稿＆全文検索のサンプルへ飛ぶ</nuxt-link>
+    <nuxt-link to="/reports">個別ページのサンプルへ飛ぶ</nuxt-link>
+    <modal name="hello-world">
+      hello, world!
+    </modal>
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable"
+import Logo from '~/components/Logo.vue'
 
 export default {
   components: {
@@ -123,6 +159,39 @@ export default {
     },
     replace3: function() {
       this.list3 = [{ name: "Edgard3", id: this.id++ }]
+    },
+    show () {
+      this.$modal.show('hello-world');
+    },
+    hide () {
+      this.$modal.hide('hello-world');
+    },
+    showDialog () {
+      this.$modal.show('dialog', {
+        title: 'Alert!',
+        text: 'You are too awesome',
+        buttons: [
+          {
+            title: 'Deal with it',
+            handler: () => { alert('Woot!') }
+          },
+          {
+            title: '',       // Button title
+            default: true,    // Will be triggered by default if 'Enter' pressed.
+            handler: () => {} // Button click handler
+          },
+          {
+            title: 'Close'
+          }
+        ]
+      })
+    },
+    showModalComponent () {
+      this.$modal.show(Logo, {
+        text: 'This text is passed as a property'
+      }, {
+        draggable: true
+      })
     }
   }
 }

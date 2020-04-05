@@ -38,6 +38,7 @@ module.exports = {
   */
   plugins: [
     { src: '~/plugins/firebase.js', ssr: false },
+    { src: '~/plugins/vue-js-modal.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

@@ -1,8 +1,11 @@
 <template>
   <div class="p-2">
-    <h1>プロジェクト名</h1>
-    <h2>プロダクトバックログ名</h2>
-    <h3>スプリントバックログ</h3>
+    <Breadcrumbs :items="[
+    { label: 'プロジェクト名', url: '#' },
+    { label: '案件名', url: '#' },
+    { label: 'プロダクトバックログ名', url: '#' },
+    { label: 'スプリントバックログ', url: '#' },
+    ]" />
     <div class="board">
       <draggable
         id="first"
@@ -104,25 +107,30 @@
         </div>
       </draggable>
     </div>
-    <h3>成果物と目的の差分</h3>
-    <h3>差分の理由</h3>
-    <h3>フィードバック</h3>
-    <nuxt-link to="/works">投稿＆全文検索のサンプルへ飛ぶ</nuxt-link>
-    <nuxt-link to="/reports">個別ページのサンプルへ飛ぶ</nuxt-link>
+    <Balloons class="mt-2" :items="[
+    { id: 1, name: 'A', message: '成果物と目的の差分は〜だよ！', my: true },
+    { id: 2, name: 'A', message: '差分の理由は〜だよ！', my: true },
+    { id: 3, name: 'B', message: 'フィードバックは〜だよ！！', my: false },
+    { id: 4, name: 'A', message: '感謝！次からは気をつけるよ！', my: true },
+    ]" />
     <modal name="hello-world">
       hello, world!
     </modal>
-    <h3>チャットスペースいれたい</h3>
+    <nuxt-link to="/works">投稿＆全文検索のサンプルへ飛ぶ</nuxt-link>
+    <nuxt-link to="/reports">個別ページのサンプルへ飛ぶ</nuxt-link>
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable"
-import Logo from '~/components/Logo.vue'
+import Breadcrumbs from '~/components/Breadcrumbs.vue'
+import Balloons from '~/components/Balloons.vue'
 
 export default {
   components: {
-    draggable
+    draggable,
+    Breadcrumbs,
+    Balloons
   },
   data() {
     return {

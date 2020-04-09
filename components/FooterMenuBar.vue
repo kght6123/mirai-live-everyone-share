@@ -21,7 +21,7 @@ export default {
 
 <style>
 body {
-  padding-bottom: 50px;
+  padding-bottom: 75px;
 }
 </style>
 
@@ -35,8 +35,8 @@ body {
   width: 100%;
   display: flex;
   z-index: 998;
-  /* backdrop-filter: blur(7px); */
-  /* background: rgba(255, 255, 255, 0.1); */
+  backdrop-filter: blur(7px) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
   box-shadow:
   0 0px 2px rgba(0, 0, 0, 0.034),
   0 0px 4.8px rgba(0, 0, 0, 0.048),
@@ -56,7 +56,7 @@ body {
   font-size: 12px;
 }
 .icon:hover, .icon:active, .icon:focus {
-  @apply bg-indigo-200;
+  @apply bg-indigo-200 opacity-50;
   /* background-color: rgba(255, 255, 255, 0.75); */
 }
 </style>

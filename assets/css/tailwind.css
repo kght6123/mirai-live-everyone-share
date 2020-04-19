@@ -24,6 +24,8 @@ html {
   // text-align: justify;*/
   /* レスポンシブフォントサイズ */
   font-size: calc(100vmin / 32.5);
+  /* 日本語フォント指定 */
+  font-family: 'IPAゴシック','IPAGothic','メイリオ',Meiryo,'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','ＭＳ Ｐゴシック',sans-serif;
 }
 
 body {

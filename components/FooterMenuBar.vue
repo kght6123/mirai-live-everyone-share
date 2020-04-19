@@ -32,7 +32,7 @@ body {
   bottom: 0;
   height: 75px;
   height: calc(75px + env(safe-area-inset-bottom));
-  width: calc(100% - 14px);
+  width: calc(100% - 14px - 0.5em);
   display: flex;
   z-index: 998;
   backdrop-filter: blur(7px) !important;
@@ -53,7 +53,7 @@ body {
   line-height: 50px;
   line-height: calc(50px + env(safe-area-inset-bottom));
   text-align: center;
-  font-size: 12px;
+  font-size: 1em;
 }
 .icon:hover, .icon:active, .icon:focus {
   @apply bg-indigo-200 opacity-50;
